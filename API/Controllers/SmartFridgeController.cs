@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Models;
@@ -10,15 +11,15 @@ using DAL;
 
 namespace API.Controllers
 {
-    public class SmartFridgeController : Controller
+    public class SmartFridgeController : ApiController
     {
-        public string GetFridge(string id)
+        public Fridge GetFridge(int id)
         {
             int idInt32 = Convert.ToInt32(id);
             Fridge fridge = FridgeDataAccess.GetFridge(idInt32);
-            return JsonConvert.SerializeObject(fridge, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
+            return fridge;// JsonConvert.SerializeObject(fridge, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
         }
-
+        
         public void AddFridge(string fridgeJson)
         {
             string command = @"INSERT INTO Fridge VALUES (@Id, @Name, @FridgeTemp, @FreezerTemp, @Alarm, @FridgeOpened, @FreezerOpened, @TimeFridgeOpened, @TimeFreezerOpened, @UserEmail)";
