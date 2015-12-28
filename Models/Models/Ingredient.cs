@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    class Ingredient
+    public class Ingredient
     {
         public int Id { get; set; }
         public int RecieptId { get; set; }

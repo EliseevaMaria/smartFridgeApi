@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    class FridgeProduct
+    public class FridgeProduct
     {
         public int Id { get; set; }
         public string UserEmail { get; set; }

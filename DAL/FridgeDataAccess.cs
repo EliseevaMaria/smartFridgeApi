@@ -24,7 +24,7 @@ namespace DAL
                         result = new Fridge
                         {
                             Id = dr.GetInt32(0),
-                            Name = dr.GetString(1),
+                            Name = dr.GetString(1).Trim(),
                             FridgeTemp = dr.GetInt32(2),
                             FreezerTemp = dr.GetInt32(3),
                             Alarm = dr.GetBoolean(4),
@@ -32,7 +32,7 @@ namespace DAL
                             FreezerOpened = dr.GetBoolean(6),
                             TimeFridgeOpened = dr.GetDateTime(7),
                             TimeFreezerOpened = dr.GetDateTime(8),
-                            UserEmail = dr.GetString(9)
+                            UserEmail = dr.GetString(9).Trim()
                         };
                     }
                 }
@@ -55,7 +55,7 @@ namespace DAL
                         result.Add(new Fridge
                         {
                             Id = dr.GetInt32(0),
-                            Name = dr.GetString(1),
+                            Name = dr.GetString(1).Trim(),
                             FridgeTemp = dr.GetInt32(2),
                             FreezerTemp = dr.GetInt32(3),
                             Alarm = dr.GetBoolean(4),
@@ -63,7 +63,7 @@ namespace DAL
                             FreezerOpened = dr.GetBoolean(6),
                             TimeFridgeOpened = dr.GetDateTime(7),
                             TimeFreezerOpened = dr.GetDateTime(8),
-                            UserEmail = dr.GetString(9)
+                            UserEmail = dr.GetString(9).Trim()
                         });
                     }
                 }
