@@ -11,7 +11,7 @@ using DAL;
 
 namespace API.Controllers
 {
-    public class SmartFridgeController : ApiController
+    public class SmartFridgeController : Controller
     {
         public Fridge GetFridge(int id)
         {
