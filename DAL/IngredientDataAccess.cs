@@ -1,36 +1,35 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Models;
-using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class ReceiptDataAccess
+    public class IngredientDataAccess
     {
         const string _connection = "Server = tcp:smartfridge.database.windows.net,1433; Database = smartFridge; User ID = maria@smartfridge; Password = Helloworld123; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
 
-        public static List<Receipt> GetReceipts(string email)
+        public static List<Ingredient> GetIngredients(int receiptId)
         {
-            List<Receipt> result = new List<Receipt>();
+            List<Ingredient> result = new List<Ingredient>();
             using (SqlConnection conn = new SqlConnection(_connection))
             {
                 conn.Open();
-                var cmd = new SqlCommand(@"SELECT * FROM Reciept WHERE UserEmail=@Email", conn);
-                cmd.Parameters.AddWithValue("@Email", email);
+                var cmd = new SqlCommand(@"SELECT * FROM Ingredient WHERE RecieptId=@ReceiptId", conn);
+                cmd.Parameters.AddWithValue("@ReceiptId", receiptId);
                 using (SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
                 {
                     while (dr.Read())
                     {
-                        result.Add(new Receipt
+                        result.Add(new Ingredient
                         {
                             Id = dr.GetInt32(0),
-                            Name = dr.GetString(1),
-                            UserEmail = dr.GetString(2),
-                            IsPrivate = dr.GetBoolean(3),
-                            Type = dr.GetString(4)
+                            RecieptId = receiptId,
+                            ProductId = dr.GetInt32(2),
+                            Amount = (float)dr.GetDouble(3)
                         });
                     }
                 }

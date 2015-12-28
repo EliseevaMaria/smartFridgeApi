@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Models;
 using DAL;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -17,6 +18,19 @@ namespace API.Controllers
         {
             List<Fridge> fridge = FridgeDataAccess.GetFridges(email);
             return fridge;
+        }
+
+        public HttpResponseMessage PutFridge(Fridge fridge)
+        {
+            try
+            {
+                FridgeDataAccess.UpdateFridge(fridge);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

@@ -22,16 +22,14 @@ namespace API.Controllers
         
         public void AddFridge(string fridgeJson)
         {
-            string command = @"INSERT INTO Fridge VALUES (@Id, @Name, @FridgeTemp, @FreezerTemp, @Alarm, @FridgeOpened, @FreezerOpened, @TimeFridgeOpened, @TimeFreezerOpened, @UserEmail)";
             Fridge fridge = JsonConvert.DeserializeObject<Fridge>(fridgeJson, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
-            FridgeDataAccess.ChangeFridge(command, fridge);
+            FridgeDataAccess.AddFridge(fridge);
         }
 
         public void UpdateFridge(string fridgeJson)
         {
-            string command = @"UPDATE Fridge SET Name = @Name, FridgeTemp = @FridgeTemp, FreezerTemp = @FreezerTemp, Alarm = @Alarm, FridgeOpened = @FridgeOpened, FreezerOpened = @FreezerOpened, TimeFridgeOpened = @TimeFridgeOpened, TimeFreezerOpened = @TimeFreezerOpened, UserEmail = @UserEmail WHERE Id = @Id";
             Fridge fridge = JsonConvert.DeserializeObject<Fridge>(fridgeJson, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
-            FridgeDataAccess.ChangeFridge(command, fridge);
+            FridgeDataAccess.UpdateFridge(fridge);
         }
     }
 }

@@ -71,8 +71,30 @@ namespace DAL
             return result;
         }
 
-        public static void ChangeFridge(string command, Fridge fridge)
+        public static void UpdateFridge(Fridge fridge, string com = "")
         {
+            string command = @"UPDATE Fridge SET Name = @Name, FridgeTemp = @FridgeTemp, FreezerTemp = @FreezerTemp, Alarm = @Alarm, FridgeOpened = @FridgeOpened, FreezerOpened = @FreezerOpened, TimeFridgeOpened = @TimeFridgeOpened, TimeFreezerOpened = @TimeFreezerOpened, UserEmail = @UserEmail WHERE Id = @Id";
+            using (SqlConnection conn = new SqlConnection(_connection))
+            {
+                var cmd = new SqlCommand(command, conn);
+                cmd.Parameters.AddWithValue("@Id", fridge.Id);
+                cmd.Parameters.AddWithValue("@Name", fridge.Name);
+                cmd.Parameters.AddWithValue("@FridgeTemp", fridge.FridgeTemp);
+                cmd.Parameters.AddWithValue("@FreezerTemp", fridge.FreezerTemp);
+                cmd.Parameters.AddWithValue("@Alarm", fridge.Alarm);
+                cmd.Parameters.AddWithValue("@FridgeOpened", fridge.FridgeOpened);
+                cmd.Parameters.AddWithValue("@FreezerOpened", fridge.FreezerOpened);
+                cmd.Parameters.AddWithValue("@TimeFridgeOpened", fridge.TimeFridgeOpened);
+                cmd.Parameters.AddWithValue("@TimeFreezerOpened", fridge.TimeFreezerOpened);
+                cmd.Parameters.AddWithValue("@UserEmail", fridge.UserEmail);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void AddFridge(Fridge fridge)
+        {
+            string command = @"INSERT INTO Fridge VALUES (@Id, @Name, @FridgeTemp, @FreezerTemp, @Alarm, @FridgeOpened, @FreezerOpened, @TimeFridgeOpened, @TimeFreezerOpened, @UserEmail)";
             using (SqlConnection conn = new SqlConnection(_connection))
             {
                 var cmd = new SqlCommand(command, conn);
