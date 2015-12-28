@@ -13,11 +13,11 @@ namespace API.Controllers
 {
     public class SmartFridgeController : Controller
     {
-        public Fridge GetFridge(int id)
+        public string GetFridge(int id)
         {
             int idInt32 = Convert.ToInt32(id);
             Fridge fridge = FridgeDataAccess.GetFridge(idInt32);
-            return fridge;// JsonConvert.SerializeObject(fridge, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
+            return JsonConvert.SerializeObject(fridge, new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss" });
         }
         
         public void AddFridge(string fridgeJson)
