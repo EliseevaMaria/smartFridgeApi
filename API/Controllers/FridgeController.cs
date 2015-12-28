@@ -20,7 +20,7 @@ namespace API.Controllers
             return fridge;
         }
 
-        public HttpResponseMessage PutFridge(Fridge fridge)
+        public HttpResponseMessage PostFridge(Fridge fridge)
         {
             try
             {
