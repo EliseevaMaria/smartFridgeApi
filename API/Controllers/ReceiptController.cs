@@ -14,7 +14,6 @@ namespace API.Controllers
     {
         public List<ReceiptDTO> GetFridges(string email)
         {
-
             List<ReceiptDTO> receipts = Converting.ReceiptsToDto(ReceiptDataAccess.GetReceipts(email));
             return receipts;
         }
