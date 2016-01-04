@@ -17,5 +17,11 @@ namespace API.Controllers
             List<ReceiptDTO> receipts = Converting.ReceiptsToDto(ReceiptDataAccess.GetReceipts(email));
             return receipts;
         }
+
+        public HttpResponseMessage Post(Receipt newRecipt)
+        {
+            ReceiptDataAccess.UpdateReceipt(newRecipt);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

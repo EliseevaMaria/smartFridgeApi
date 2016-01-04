@@ -23,5 +23,11 @@ namespace API.Controllers
 
             return Converting.IngredientToDto(ingrs);
         }
+
+        public HttpResponseMessage Post(List<IngredientDTO> ingrs)
+        {
+                IngredientDataAccess.RefreshIngredients(ingrs);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

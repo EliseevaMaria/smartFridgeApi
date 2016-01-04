@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Fridge.cs" />
     <Compile Include="FridgeProduct.cs" />
+    <Compile Include="FridgeProductDTO.cs" />
     <Compile Include="Ingredient.cs" />
     <Compile Include="IngredientDTO.cs" />
     <Compile Include="Product.cs" />

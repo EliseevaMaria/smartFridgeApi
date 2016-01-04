@@ -36,5 +36,30 @@ namespace DAL
             }
             return result;
         }
+
+        public static void RefreshIngredients(List<IngredientDTO> ingrs)
+        {
+            string command1 = @"DELETE FROM Ingredient WHERE RecieptId = @ReceiptId";
+            string command2 = @"INSERT INTO Ingredient VALUES (@RecieptId, @ProductId, @Amount)";
+            if (ingrs.Count > 0)
+            {
+                using (SqlConnection conn = new SqlConnection(_connection))
+                {
+                    var cmd = new SqlCommand(command1, conn);
+                    cmd.Parameters.AddWithValue("@ReceiptId", ingrs[0].ReceiptId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    for (int i = 0; i < ingrs.Count; i++)
+                    {
+                        var cmd2 = new SqlCommand(command2, conn);
+                        cmd2.Parameters.AddWithValue("@RecieptId", ingrs[i].ReceiptId);
+                        cmd2.Parameters.AddWithValue("@ProductId", ingrs[i].Product.Id);
+                        cmd2.Parameters.AddWithValue("@Amount", ingrs[i].Amount);
+                        cmd2.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace API.Controllers
             {
                 FridgeDataAccess.UpdateFridge(fridge);
             }
-            catch
+            catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }

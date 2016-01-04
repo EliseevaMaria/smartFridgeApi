@@ -8,7 +8,8 @@ namespace Models
 {
     public class IngredientDTO
     {
-        public string Name { get; set; }
+        public int ReceiptId { get; set; }
+        public Product Product { get; set; }
         public float Amount { get; set; }
         public string Measure { get; set; }
     }
